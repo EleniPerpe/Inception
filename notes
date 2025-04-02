@@ -1,0 +1,15 @@
+PRINT POSTS
+
+docker exec -it wp-php bash 
+cd /var/www/html
+wp comment approve 2 --allow-root
+wp comment get 2 --field=comment_content --allow-root
+
+PRINT USERS
+
+docker exec -it wp-php bash
+cd /var/www/html
+wp user list --allow-root
+
+
+docker compose up --build 
