@@ -4,7 +4,7 @@ COPY tools/script.sh .
 
 RUN mkdir -p /docker-entrypoint-initdb.d \
     /run/mysqld \
-    /etc/mysql/mariadb.conf.d && chmod +x tools/script.sh
+    /etc/mysql/mariadb.conf.d && chmod +x /script.sh
 
 RUN apt update && apt upgrade -y && apt install -y \
     mariadb-server \
