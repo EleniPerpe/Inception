@@ -1,9 +1,12 @@
 # Makefile for InceptionGit project
 
+
 .PHONY: up down build clean
 
 # Build and start the containers
 up:
+	mkdir -p /home/eperperi/database
+	mkdir -p /home/eperperi/web
 	docker-compose up  --build
 
 # Stop and remove the containers
