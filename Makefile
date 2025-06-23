@@ -1,21 +1,22 @@
 # Makefile for InceptionGit project
-
+DC_YVM = ./requirements/docker-compose.yml
+DC = docker compose -f $(DC_YVM)
 
 .PHONY: up down build clean
 
 # Build and start the containers
 up:
-	mkdir -p /home/eperperi/database
-	mkdir -p /home/eperperi/web
-	/requirements/docker-compose up  --build
+# mkdir -p /home/eperperi/database
+# mkdir -p /home/eperperi/web
+	$(DC) up  --build
 
 # Stop and remove the containers
 down:
-	/requirements/docker-compose down
+	$(DC) down
 
 # Build the Docker images
 build:
-	/requirements/docker-compose build
+	$(DC) build
 
 # Clean up unused Docker images and volumes
 clean:

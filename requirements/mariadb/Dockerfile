@@ -11,7 +11,7 @@ RUN apt update && apt upgrade -y && apt install -y \
     curl \
     gettext
 
-COPY 50-server.conf /etc/mysql/mariadb.conf.d/
+COPY /conf/50-server.conf /etc/mysql/mariadb.conf.d/
 
 EXPOSE 3306
 

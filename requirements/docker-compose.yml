@@ -2,21 +2,21 @@ version: "3.8"
 
 services:
   nginx:
-    build: requirements/nginx/.
+    build: nginx/.
     container_name: nginx
     depends_on:
       - wordpress
     ports:
-      - "443:443"
+      - "80:80"
     volumes:
       - ./web:/var/www/html
     networks:
       inception:
-    env:
+    env_file:
       - .env
     restart: on-failure
   wordpress:
-    build: requirements/wordpress/.
+    build: wordpress/.
     container_name: wp-php
     depends_on:
       - mariadb
@@ -24,26 +24,32 @@ services:
       - ./web:/var/www/html
     networks:
       inception:
-    env:
+    env_file:
       - .env
     restart: on-failure
   mariadb:
-    build: requirements/mariadb/.
+    build: mariadb/.
     container_name: mariadb
     volumes:
       - ./database:/var/lib/mysql
     networks:
       inception:
-    env:
+    env_file:
       - .env
     restart: on-failure
 
 volumes:
   database:
     driver: local
+    driver_opts:
+      type: bind
+      o: bind
   web:
     driver: local
+    driver_opts:
+      type: bind
+      o: bind
 
 networks:
     inception:
-    driver: bridge
+      driver: bridge
