@@ -1,14 +1,20 @@
 #!/bin/bash
 
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-  mysql_install_db --user=$DB_USER --datadir=/var/lib/mysql
-fi
+set -e
 
-cat << EOF > /etc/mysql/init.sql
-CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\`;
-CREATE USER IF NOT EXISTS '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}';
-GRANT ALL PRIVILEGES ON \`${DB_NAME}\`.* TO '${DB_USER}'@'%' WITH GRANT OPTION;
+service mariadb start
+
+until mariadb-admin ping --silent; do
+  sleep 1
+done
+
+mariadb -u root <<EOF
+CREATE DATABASE IF NOT EXISTS \`${MYSQL_DB}\`;
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASS}';
+GRANT ALL PRIVILEGES ON \`${MYSQL_DB}\`.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
+
+mysqladmin shutdown --socket=/var/run/mysqld/mysqld.sock -u root
 
 exec mysqld
