@@ -7,15 +7,15 @@
 up:
 	mkdir -p /home/eperperi/database
 	mkdir -p /home/eperperi/web
-	docker-compose up  --build
+	/requirements/docker-compose up  --build
 
 # Stop and remove the containers
 down:
-	docker-compose down
+	/requirements/docker-compose down
 
 # Build the Docker images
 build:
-	docker-compose build
+	/requirements/docker-compose build
 
 # Clean up unused Docker images and volumes
 clean:

@@ -1,11 +1,12 @@
 FROM debian:bullseye
 
 RUN apt update && apt upgrade && apt install -y \
-	php-fpm \
-	php-mysqli \
-	curl
+	php \
+	php-mysql \
+	curl \
+	php7.4-fpm \
+	mariadb-client
 
-COPY www.conf /etc/php/8.2/fpm/pool.d/.
-COPY script.sh .
-RUN chmod +x script.sh
+RUN chmod +x /script.sh
+
 CMD ["./script.sh"]

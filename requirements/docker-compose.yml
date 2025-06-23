@@ -12,6 +12,9 @@ services:
       - ./web:/var/www/html
     networks:
       inception:
+    env:
+      - .env
+    restart: on-failure
   wordpress:
     build: requirements/wordpress/.
     container_name: wp-php
@@ -21,6 +24,9 @@ services:
       - ./web:/var/www/html
     networks:
       inception:
+    env:
+      - .env
+    restart: on-failure
   mariadb:
     build: requirements/mariadb/.
     container_name: mariadb
@@ -28,6 +34,9 @@ services:
       - ./database:/var/lib/mysql
     networks:
       inception:
+    env:
+      - .env
+    restart: on-failure
 
 volumes:
   database:
@@ -37,3 +46,4 @@ volumes:
 
 networks:
     inception:
+    driver: bridge
