@@ -9,9 +9,9 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html
     networks:
-      inception:
+      - inception
     env_file:
       - .env
     restart: on-failure
@@ -21,9 +21,9 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html
     networks:
-      inception:
+      - inception
     env_file:
       - .env
     restart: on-failure
@@ -31,24 +31,28 @@ services:
     build: mariadb/.
     container_name: mariadb
     volumes:
-      - ./database:/var/lib/mysql
+      - database:/var/lib/mysql
     networks:
-      inception:
+      - inception
     env_file:
       - .env
     restart: on-failure
 
 volumes:
   database:
+    name: database
     driver: local
     driver_opts:
       type: bind
       o: bind
+      device: "/home/eperperi/data/database"
   web:
+    name: web
     driver: local
     driver_opts:
       type: bind
       o: bind
+      device: "/home/eperperi/data/web"
 
 networks:
     inception:

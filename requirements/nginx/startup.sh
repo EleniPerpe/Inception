@@ -1,4 +1,4 @@
 #!/bin/bash
 
-ln -sf "$SITES_DIR/default" "/etc/nginx/sites-enabled/default"
+ln -sf "/etc/nginx/sites-available/default" "/etc/nginx/sites-enabled/default"
 nginx -t

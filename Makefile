@@ -2,12 +2,12 @@
 DC_YVM = ./requirements/docker-compose.yml
 DC = docker compose -f $(DC_YVM)
 
-.PHONY: up down build clean
+.PHONY: up down build clean re
 
 # Build and start the containers
 up:
-# mkdir -p /home/eperperi/database
-# mkdir -p /home/eperperi/web
+	mkdir -p /home/eperperi/data/database
+	mkdir -p /home/eperperi/data/web
 	$(DC) up  --build
 
 # Stop and remove the containers
@@ -22,3 +22,5 @@ build:
 clean:
 	docker system prune -f
 	docker volume prune -f
+
+re: down clean up

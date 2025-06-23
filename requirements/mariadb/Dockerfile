@@ -7,16 +7,14 @@ RUN apt update && apt upgrade -y && apt install -y \
 	openssl \
 	&& rm -rf /var/lib/apt/lists/*
 	
-COPY tools/script.sh .
-
 RUN sed -i 's/bind-address.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+
+COPY tools/script.sh .
 
 RUN mkdir -p /docker-entrypoint-initdb.d \
     /run/mysqld \
-    /etc/mysql/mariadb.conf.d && chmod +x /script.sh
-
-
-	
+    /etc/mysql/mariadb.conf.d && \
+	chmod +x /script.sh
 
 EXPOSE 3306
 
