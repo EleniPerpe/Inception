@@ -30,7 +30,5 @@ clean:
 	$(DC) kill
 	docker system prune -f
 	docker volume prune -f
-	sudo rm -rf /Users/eperperi/data/database/*
-	sudo rm -rf -p /Users/eperperi/data/web/*
 
 re: down clean make
