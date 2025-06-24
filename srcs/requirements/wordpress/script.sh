@@ -25,7 +25,7 @@ wp config create \
 wp core install \
     --url=${DOMAIN} \
     --title=${WORDPRESS_TITLE} \
-    --admin_user=${WORDPRESS_ADMIN_NAME} \
+    --admin_user=${WORDPRESS_ADMIN_USER} \
     --admin_password=${WORDPRESS_ADMIN_PASS} \
     --admin_email=${WORDPRESS_ADMIN_EMAIL} --allow-root
 wp theme install twentytwentyfour --activate --allow-root
