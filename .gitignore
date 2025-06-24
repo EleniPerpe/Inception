@@ -1,1 +1,6 @@
+.gitignore
 .DS_Store
+secrets/credentials.txt
+secrets/db_password.txt
+secrets/db_root_password.txt
+srcs/.env
