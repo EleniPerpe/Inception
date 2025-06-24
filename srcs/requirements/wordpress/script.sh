@@ -6,6 +6,10 @@ cd /var/www/html
 chmod -R 755 /var/www/html
 sed -i '36 s/\/run\/php\/php7.4-fpm.sock/9000/' /etc/php/7.4/fpm/pool.d/www.conf
 
+MYSQL_PASS=$(cat /run/secrets/mysql_pass)
+WORDPRESS_ADMIN_PASS=$(cat /run/secrets/wp_a_pass)
+WORDPRESS_USER_PASS=$(cat /run/secrets/wp_user_pass)
+
 for ((i = 1; i <= 10; i++)); do
     if mariadb -h mariadb -P 3306 \
         -u "${MYSQL_USER}" \

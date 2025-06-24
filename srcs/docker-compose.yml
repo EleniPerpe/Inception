@@ -1,6 +1,6 @@
 services:
   nginx:
-    build: nginx/.
+    build: ./requirements/nginx/.
     container_name: nginx
     depends_on:
       - wordpress
@@ -14,7 +14,7 @@ services:
       - .env
     restart: on-failure
   wordpress:
-    build: wordpress/.
+    build: ./requirements/wordpress/.
     container_name: wordpress
     depends_on:
       - mariadb
@@ -24,9 +24,13 @@ services:
       - inception
     env_file:
       - .env
+    secrets:
+      - mysql_pass
+      - wp_a_pass
+      - wp_user_pass
     restart: on-failure
   mariadb:
-    build: mariadb/.
+    build: ./requirements/mariadb/.
     container_name: mariadb
     volumes:
       - database:/var/lib/mysql
@@ -34,6 +38,8 @@ services:
       - inception
     env_file:
       - .env
+    secrets:
+      - mysql_pass
     restart: on-failure
 
 volumes:
@@ -55,3 +61,11 @@ volumes:
 networks:
     inception:
       driver: bridge
+
+secrets:
+  mysql_pass:
+    file: ../secrets/credentials.txt
+  wp_a_pass:
+    file: ../secrets/db_root_password.txt
+  wp_user_pass:
+    file: ../secrets/db_password.txt

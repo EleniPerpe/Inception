@@ -7,7 +7,7 @@ RUN apt update && apt upgrade && apt install -y \
 	php7.4-fpm \
 	mariadb-client
 
-COPY script.sh .
+COPY ./script.sh .
 
 RUN chmod +x /script.sh
 
